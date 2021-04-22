@@ -102,6 +102,29 @@ pred user_recv_pre[m : Message, s : State] {
 pred user_send_post[m : Message, s : State, s' : State] {
   s'.network = m and
   // FILL IN HERE
+  s'.ringing = s.ringing and
+  (
+   (
+     m.type in SDPOffer and 
+     s'.calls = s.calls - (m.dest -> s.calls[m.dest]) + (m.dest ->  SignallingOffered) and
+     s'.audio = s.audio
+   ) or
+   (
+     m.type in SDPAnswer and 
+     s'.calls = s.calls - (m.dest -> s.calls[m.dest]) + (m.dest ->  SignallingAnswered) and 
+     s'.audio = s.audio
+   ) or
+   (
+     m.type in SDPCandidates and 
+     s'.calls = s.calls - (m.dest -> s.calls[m.dest]) + (m.dest ->  SignallingComplete) and 
+     s'.audio = s.audio
+   ) or
+   (
+     m.type in Connect and 
+     s'.calls = s.calls and
+     s'.audio = m.dest
+   )
+  )
 }
 
 // postcondition for the user receiving a message m
@@ -112,6 +135,33 @@ pred user_send_post[m : Message, s : State, s' : State] {
 pred user_recv_post[m : Message, s : State, s' : State] {
   no s'.network and
   // FILL IN HERE
+ 
+  (
+   (
+     m.type in SDPOffer and 
+     s'.calls = s.calls - (m.source -> s.calls[m.source])+(m.source -> SignallingStart) and
+     s'.ringing = s.ringing and
+     s'.audio = s.audio
+   ) or
+   (
+     m.type in SDPAnswer and 
+     s'.calls = s.calls - (m.source -> s.calls[m.source])+(m.source -> SignallingOngoing) and 
+     s'.ringing = s.ringing and
+     s'.audio = s.audio
+   ) or
+   (
+     m.type in SDPCandidates and 
+    s'.calls = s.calls - (m.source -> s.calls[m.source])+(m.source -> SignallingComplete) and 
+     s'.ringing = m.source and
+     s'.audio = s.audio
+   ) or
+   (
+     m.type in Connect and 
+     s'.calls = s.calls  and
+     s'.ringing = s.ringing and
+     s'.audio = m.source 
+   )
+  )
 }
 
 // the action of the attacker sending a message
@@ -196,6 +246,14 @@ fact {
 // participant or to answer a call from them
 assert no_bad_states {
  // FILL IN HERE
+ // two kinds of vulnerability found, the first assert should be able find all of them
+
+  all s: State |  (no s.audio or s.audio = s.last_answered  or s.audio = s.last_called)
+
+ // or use one of the following assert to locate each faster
+
+  // all s: State |  (no s.audio or s.audio = s.last_answered or  s.audio = s.ringing or s.audio = s.last_called)
+  // all s: State | some s1:State |  (no s.audio or s.audio = s.last_answered or s.audio = s1.last_called)
 }
 
 // describe the vulnerability that this check identified
@@ -210,7 +268,7 @@ assert no_bad_states {
 // specifically, what guarantees you think are provided by this check.
 // FILL IN HERE
 // See the assignment handout for more details here.
-check no_bad_states // CHOOSE BOUND HERE
+check no_bad_states for 8 // CHOOSE BOUND HERE
 
 // Alloy "run" commands and predicate definitions to
 // showing successful execution of your (fixed) protocol
