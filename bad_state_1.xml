@@ -1,0 +1,199 @@
+<alloy builddate="2019-08-14T18:53:58.297Z">
+
+<instance bitwidth="4" maxseq="7" command="Check no_bad_states for 8" filename="D:\unimelb\SWEN90010 High Integrity Systems Engineering\asgn2\signal.als">
+
+<sig label="seq/Int" ID="0" parentID="1" builtin="yes">
+</sig>
+
+<sig label="Int" ID="1" parentID="2" builtin="yes">
+</sig>
+
+<sig label="String" ID="3" parentID="2" builtin="yes">
+</sig>
+
+<sig label="this/AttackerAddress" ID="4" parentID="5">
+   <atom label="AttackerAddress$0"/>
+   <atom label="AttackerAddress$1"/>
+</sig>
+
+<sig label="this/UserAddress" ID="6" parentID="5" one="yes">
+   <atom label="UserAddress$0"/>
+</sig>
+
+<sig label="this/Address" ID="5" parentID="2" abstract="yes">
+</sig>
+
+<sig label="this/SDPOffer" ID="7" parentID="8" one="yes">
+   <atom label="SDPOffer$0"/>
+</sig>
+
+<sig label="this/SDPAnswer" ID="9" parentID="8" one="yes">
+   <atom label="SDPAnswer$0"/>
+</sig>
+
+<sig label="this/SDPCandidates" ID="10" parentID="8" one="yes">
+   <atom label="SDPCandidates$0"/>
+</sig>
+
+<sig label="this/Connect" ID="11" parentID="8" one="yes">
+   <atom label="Connect$0"/>
+</sig>
+
+<sig label="this/MessageType" ID="8" parentID="2" abstract="yes">
+</sig>
+
+<sig label="this/Message" ID="12" parentID="2">
+   <atom label="Message$0"/>
+   <atom label="Message$1"/>
+   <atom label="Message$2"/>
+   <atom label="Message$3"/>
+</sig>
+
+<field label="type" ID="13" parentID="12">
+   <tuple> <atom label="Message$0"/> <atom label="SDPCandidates$0"/> </tuple>
+   <tuple> <atom label="Message$1"/> <atom label="SDPOffer$0"/> </tuple>
+   <tuple> <atom label="Message$2"/> <atom label="Connect$0"/> </tuple>
+   <tuple> <atom label="Message$3"/> <atom label="SDPAnswer$0"/> </tuple>
+   <types> <type ID="12"/> <type ID="8"/> </types>
+</field>
+
+<field label="source" ID="14" parentID="12">
+   <tuple> <atom label="Message$0"/> <atom label="UserAddress$0"/> </tuple>
+   <tuple> <atom label="Message$1"/> <atom label="UserAddress$0"/> </tuple>
+   <tuple> <atom label="Message$2"/> <atom label="AttackerAddress$1"/> </tuple>
+   <tuple> <atom label="Message$3"/> <atom label="AttackerAddress$1"/> </tuple>
+   <types> <type ID="12"/> <type ID="5"/> </types>
+</field>
+
+<field label="dest" ID="15" parentID="12">
+   <tuple> <atom label="Message$0"/> <atom label="AttackerAddress$1"/> </tuple>
+   <tuple> <atom label="Message$1"/> <atom label="AttackerAddress$1"/> </tuple>
+   <tuple> <atom label="Message$2"/> <atom label="UserAddress$0"/> </tuple>
+   <tuple> <atom label="Message$3"/> <atom label="UserAddress$0"/> </tuple>
+   <types> <type ID="12"/> <type ID="5"/> </types>
+</field>
+
+<sig label="this/SignallingStart" ID="16" parentID="17" one="yes">
+   <atom label="SignallingStart$0"/>
+</sig>
+
+<sig label="this/SignallingOffered" ID="18" parentID="17" one="yes">
+   <atom label="SignallingOffered$0"/>
+</sig>
+
+<sig label="this/SignallingAnswered" ID="19" parentID="17" one="yes">
+   <atom label="SignallingAnswered$0"/>
+</sig>
+
+<sig label="this/SignallingOngoing" ID="20" parentID="17" one="yes">
+   <atom label="SignallingOngoing$0"/>
+</sig>
+
+<sig label="this/SignallingComplete" ID="21" parentID="17" one="yes">
+   <atom label="SignallingComplete$0"/>
+</sig>
+
+<sig label="this/Answered" ID="22" parentID="17" one="yes">
+   <atom label="Answered$0"/>
+</sig>
+
+<sig label="this/Connected" ID="23" parentID="17" one="yes">
+   <atom label="Connected$0"/>
+</sig>
+
+<sig label="this/CallState" ID="17" parentID="2" abstract="yes">
+</sig>
+
+<sig label="this/State" ID="24" parentID="2">
+   <atom label="State$0"/>
+   <atom label="State$1"/>
+   <atom label="State$2"/>
+   <atom label="State$3"/>
+   <atom label="State$4"/>
+   <atom label="State$5"/>
+   <atom label="State$6"/>
+   <atom label="State$7"/>
+</sig>
+
+<field label="ringing" ID="25" parentID="24">
+   <types> <type ID="24"/> <type ID="5"/> </types>
+</field>
+
+<field label="calls" ID="26" parentID="24">
+   <tuple> <atom label="State$1"/> <atom label="AttackerAddress$1"/> <atom label="SignallingOffered$0"/> </tuple>
+   <tuple> <atom label="State$2"/> <atom label="AttackerAddress$1"/> <atom label="SignallingOffered$0"/> </tuple>
+   <tuple> <atom label="State$3"/> <atom label="AttackerAddress$1"/> <atom label="SignallingOngoing$0"/> </tuple>
+   <tuple> <atom label="State$4"/> <atom label="AttackerAddress$1"/> <atom label="SignallingComplete$0"/> </tuple>
+   <tuple> <atom label="State$5"/> <atom label="AttackerAddress$1"/> <atom label="SignallingComplete$0"/> </tuple>
+   <tuple> <atom label="State$6"/> <atom label="AttackerAddress$1"/> <atom label="SignallingComplete$0"/> </tuple>
+   <tuple> <atom label="State$7"/> <atom label="AttackerAddress$1"/> <atom label="SignallingComplete$0"/> </tuple>
+   <types> <type ID="24"/> <type ID="5"/> <type ID="17"/> </types>
+</field>
+
+<field label="audio" ID="27" parentID="24">
+   <tuple> <atom label="State$7"/> <atom label="AttackerAddress$1"/> </tuple>
+   <types> <type ID="24"/> <type ID="5"/> </types>
+</field>
+
+<field label="last_answered" ID="28" parentID="24">
+   <types> <type ID="24"/> <type ID="5"/> </types>
+</field>
+
+<field label="last_called" ID="29" parentID="24">
+   <tuple> <atom label="State$0"/> <atom label="AttackerAddress$1"/> </tuple>
+   <tuple> <atom label="State$1"/> <atom label="AttackerAddress$1"/> </tuple>
+   <tuple> <atom label="State$2"/> <atom label="AttackerAddress$1"/> </tuple>
+   <tuple> <atom label="State$3"/> <atom label="AttackerAddress$1"/> </tuple>
+   <tuple> <atom label="State$4"/> <atom label="AttackerAddress$1"/> </tuple>
+   <tuple> <atom label="State$5"/> <atom label="AttackerAddress$1"/> </tuple>
+   <tuple> <atom label="State$6"/> <atom label="AttackerAddress$0"/> </tuple>
+   <tuple> <atom label="State$7"/> <atom label="AttackerAddress$0"/> </tuple>
+   <types> <type ID="24"/> <type ID="5"/> </types>
+</field>
+
+<field label="network" ID="30" parentID="24">
+   <tuple> <atom label="State$1"/> <atom label="Message$1"/> </tuple>
+   <tuple> <atom label="State$2"/> <atom label="Message$3"/> </tuple>
+   <tuple> <atom label="State$4"/> <atom label="Message$0"/> </tuple>
+   <tuple> <atom label="State$5"/> <atom label="Message$2"/> </tuple>
+   <tuple> <atom label="State$6"/> <atom label="Message$2"/> </tuple>
+   <types> <type ID="24"/> <type ID="12"/> </types>
+</field>
+
+<sig label="ord/Ord" ID="31" parentID="2" one="yes" private="yes">
+   <atom label="ord/Ord$0"/>
+</sig>
+
+<field label="First" ID="32" parentID="31" private="yes">
+   <tuple> <atom label="ord/Ord$0"/> <atom label="State$0"/> </tuple>
+   <types> <type ID="31"/> <type ID="24"/> </types>
+</field>
+
+<field label="Next" ID="33" parentID="31" private="yes">
+   <tuple> <atom label="ord/Ord$0"/> <atom label="State$0"/> <atom label="State$1"/> </tuple>
+   <tuple> <atom label="ord/Ord$0"/> <atom label="State$1"/> <atom label="State$2"/> </tuple>
+   <tuple> <atom label="ord/Ord$0"/> <atom label="State$2"/> <atom label="State$3"/> </tuple>
+   <tuple> <atom label="ord/Ord$0"/> <atom label="State$3"/> <atom label="State$4"/> </tuple>
+   <tuple> <atom label="ord/Ord$0"/> <atom label="State$4"/> <atom label="State$5"/> </tuple>
+   <tuple> <atom label="ord/Ord$0"/> <atom label="State$5"/> <atom label="State$6"/> </tuple>
+   <tuple> <atom label="ord/Ord$0"/> <atom label="State$6"/> <atom label="State$7"/> </tuple>
+   <types> <type ID="31"/> <type ID="24"/> <type ID="24"/> </types>
+</field>
+
+<sig label="univ" ID="2" builtin="yes">
+</sig>
+
+<skolem label="$no_bad_states_s" ID="34">
+   <tuple> <atom label="State$7"/> </tuple>
+   <types> <type ID="24"/> </types>
+</skolem>
+
+</instance>
+
+<source filename="D:\unimelb\SWEN90010 High Integrity Systems Engineering\asgn2\signal.als" content="open util/ordering[State] as ord&#x000a;&#x000a;// Names of you and your partner:&#x000a;// FILL IN HERE&#x000a;&#x000a;// the type of addresses&#x000a;abstract sig Address {}&#x000a;&#x000a;// some addresses are controlled by potential attackers&#x000a;sig AttackerAddress extends Address {}&#x000a;&#x000a;// one address belongs to the User who we model in this file&#x000a;one sig UserAddress extends Address {}&#x000a;&#x000a;// the four message types used in the protocol&#x000a;abstract sig MessageType {}&#x000a;one sig SDPOffer, SDPAnswer, SDPCandidates, Connect &#x000a;  extends MessageType {}&#x000a;&#x000a;// a message has a type, plus a source (sender) and&#x000a;// destination (receiver) addresses&#x000a;sig Message {&#x000a;  type  : MessageType,&#x000a;  source: Address,&#x000a;  dest  : Address,&#x000a;}&#x000a;&#x000a;&#x000a;// the seven recorded call states&#x000a;// SignallingOffered, SignallingOngoing are used only by the caller&#x000a;// SignallingStart, SignallingAnswered, and Answered are used by the &#x000a;// callee&#x000a;// SignallingComplete is used by both caller and callee&#x000a;abstract sig CallState {}&#x000a;one sig SignallingStart, SignallingOffered, SignallingAnswered,&#x000a;        SignallingOngoing,&#x000a;        SignallingComplete, Answered, Connected &#x000a;  extends CallState {}&#x000a;&#x000a;&#x000a;/* caller                                 callee&#x000a;   ------                                 ------&#x000a;                   ---- SDPOffer ---&gt;  &#x000a;   SignallingOffered                          &#x000a;                                          SignallingStart&#x000a;                    &lt;--- SDPAnswer ----&#x000a;                                          SignallingAnswered&#x000a;   SignallingOngoing&#x000a;                  ---- SDPCandidates ---&gt;&#x000a;   SignallingComplete&#x000a;                                          SignallingComplete&#x000a;                                                              ------ ringing &gt;&gt; &#x000a;                                                              &lt;&lt;--- user answers&#x000a;                                          Answered&#x000a;                  &lt;---- Connect -------&#x000a;                                          audio connected&#x000a;   audio connected&#x000a;                                          &#x000a;*/&#x000a;   &#x000a;// the state of the system&#x000a;sig State {&#x000a;  ringing: lone Address, // whether the User is ringing and if so for whicih caller&#x000a;  calls: Address -&gt; lone CallState, // the recorded call state for each call currently in progress&#x000a;  audio: lone Address,  // the participant that the User&apos;s audio is connected to&#x000a;  last_answered: lone Address, // the last caller the User answered a call from&#x000a;  last_called: lone Address,   // the last callee that the User called&#x000a;  network: lone Message        // the network, records the most recent message sent &#x000a;}&#x000a;&#x000a;&#x000a;// precondition for the User to send a message m in state s&#x000a;pred user_send_pre[m : Message, s : State] {&#x000a;  m.source in UserAddress and&#x000a;  (&#x000a;   (m.type in SDPOffer and m.dest = s.last_called and no s.calls[m.dest]) or&#x000a;   (m.type in SDPAnswer and s.calls[m.dest] = SignallingStart) or&#x000a;   (m.type in SDPCandidates and s.calls[m.dest] = SignallingOngoing) or&#x000a;   (m.type in Connect and s.calls[m.dest] = Answered and&#x000a;     s.last_answered = m.dest)&#x000a;  )&#x000a;}&#x000a;&#x000a;// precondition for the User to receive a message m in state s&#x000a;pred user_recv_pre[m : Message, s : State] {&#x000a;  m in s.network and&#x000a;  m.dest in UserAddress and&#x000a;  (&#x000a;   (m.type in SDPOffer and no s.calls[m.source]) or&#x000a;   (m.type in SDPAnswer and s.calls[m.source] = SignallingOffered) or&#x000a;   (m.type in SDPCandidates and s.calls[m.source] = SignallingAnswered) or&#x000a;   (m.type in Connect &#x000a;    and s.calls[m.source] = SignallingComplete)&#x000a;  )&#x000a;}&#x000a;&#x000a;// postcondition for the user sending a message m.&#x000a;// s is the state the message is sent in and s&apos; is the state&#x000a;// after sending the message&#x000a;//&#x000a;// No need to specify here that last_called and last_answered to not change&#x000a;pred user_send_post[m : Message, s : State, s&apos; : State] {&#x000a;  s&apos;.network = m and&#x000a;  // FILL IN HERE&#x000a;  s&apos;.ringing = s.ringing and&#x000a;  (&#x000a;   (&#x000a;     m.type in SDPOffer and &#x000a;     s&apos;.calls = s.calls - (m.dest -&gt; s.calls[m.dest]) + (m.dest -&gt;  SignallingOffered) and&#x000a;     s&apos;.audio = s.audio&#x000a;   ) or&#x000a;   (&#x000a;     m.type in SDPAnswer and &#x000a;     s&apos;.calls = s.calls - (m.dest -&gt; s.calls[m.dest]) + (m.dest -&gt;  SignallingAnswered) and &#x000a;     s&apos;.audio = s.audio&#x000a;   ) or&#x000a;   (&#x000a;     m.type in SDPCandidates and &#x000a;     s&apos;.calls = s.calls - (m.dest -&gt; s.calls[m.dest]) + (m.dest -&gt;  SignallingComplete) and &#x000a;     s&apos;.audio = s.audio&#x000a;   ) or&#x000a;   (&#x000a;     m.type in Connect and &#x000a;     s&apos;.calls = s.calls and&#x000a;     s&apos;.audio = m.dest&#x000a;   )&#x000a;  )&#x000a;}&#x000a;&#x000a;// postcondition for the user receiving a message m&#x000a;// s is the state before the message was received; s&apos;&#x000a;// is hte state after the message was received&#x000a;//&#x000a;// No need to specify here that last_called and last_answered to not change&#x000a;pred user_recv_post[m : Message, s : State, s&apos; : State] {&#x000a;  no s&apos;.network and&#x000a;  // FILL IN HERE&#x000a; &#x000a;  (&#x000a;   (&#x000a;     m.type in SDPOffer and &#x000a;     s&apos;.calls = s.calls - (m.source -&gt; s.calls[m.source])+(m.source -&gt; SignallingStart) and&#x000a;     s&apos;.ringing = s.ringing and&#x000a;     s&apos;.audio = s.audio&#x000a;   ) or&#x000a;   (&#x000a;     m.type in SDPAnswer and &#x000a;     s&apos;.calls = s.calls - (m.source -&gt; s.calls[m.source])+(m.source -&gt; SignallingOngoing) and &#x000a;     s&apos;.ringing = s.ringing and&#x000a;     s&apos;.audio = s.audio&#x000a;   ) or&#x000a;   (&#x000a;     m.type in SDPCandidates and &#x000a;    s&apos;.calls = s.calls - (m.source -&gt; s.calls[m.source])+(m.source -&gt; SignallingComplete) and &#x000a;     s&apos;.ringing = m.source and&#x000a;     s&apos;.audio = s.audio&#x000a;   ) or&#x000a;   (&#x000a;     m.type in Connect and &#x000a;     s&apos;.calls = s.calls  and&#x000a;     s&apos;.ringing = s.ringing and&#x000a;     s&apos;.audio = m.source &#x000a;   )&#x000a;  )&#x000a;}&#x000a;&#x000a;// the action of the attacker sending a message&#x000a;// s is the state before the message is sent, s&apos; is the state after&#x000a;pred attacker_msg[s, s&apos; : State] {&#x000a;  some m : Message | m.source in AttackerAddress and&#x000a;  s&apos;.network = m and&#x000a;  s&apos;.calls = s.calls and&#x000a;  s&apos;.audio = s.audio and&#x000a;  s&apos;.ringing = s.ringing and&#x000a;  s&apos;.last_called = s.last_called and&#x000a;  s&apos;.last_answered = s.last_answered&#x000a;}&#x000a;&#x000a;// the action of the user either sending or receiving a message&#x000a;pred user_msg[s, s&apos; : State] {&#x000a;  s&apos;.last_answered = s.last_answered and&#x000a;  s&apos;.last_called = s.last_called and&#x000a;  some m : Message |&#x000a;    (user_send_pre[m,s] and user_send_post[m,s,s&apos;]) or&#x000a;    (user_recv_pre[m,s] and user_recv_post[m,s,s&apos;])&#x000a;}&#x000a;&#x000a;// the action of the user deciding to answer a ringing call&#x000a;// doing so removes the &quot;ringing&quot; information from the state&#x000a;// and changes the recorded call state to Answered but otherwise&#x000a;// does not modify anything&#x000a;pred user_answers[s, s&apos; : State] {&#x000a;  some caller : Address |&#x000a;  s.calls[caller] in SignallingComplete and&#x000a;  s.ringing = caller and &#x000a;  s&apos;.audio = s.audio and&#x000a;  no s&apos;.ringing and&#x000a;  s&apos;.calls = s.calls ++ (caller -&gt; Answered) and&#x000a;  s&apos;.last_answered = caller and&#x000a;  s&apos;.last_called = s.last_called and&#x000a;  s&apos;.network = s.network&#x000a;}&#x000a;&#x000a;// teh action of the user deciding to call another participant&#x000a;// doing so simply updates the last_called state and also cancels&#x000a;// any current &quot;ringing&quot; state&#x000a;pred user_calls[s, s&apos; : State] {&#x000a;  some callee : Address | s&apos;.last_called = callee and&#x000a;  s&apos;.network = s.network and&#x000a;  s&apos;.calls = s.calls and&#x000a;  s&apos;.last_answered = s.last_answered and&#x000a;  s&apos;.audio = s.audio and&#x000a;  no s&apos;.ringing   // calling somebody else stops any current ringing call&#x000a;}&#x000a;&#x000a;// a state transition is either the user sending or receiving a msg&#x000a;// or answering a call, or choosing to call somebody, or the attacker&#x000a;// sending a message on the network&#x000a;pred state_transition[s, s&apos; : State] {&#x000a;  user_msg[s,s&apos;] or user_answers[s,s&apos;] or&#x000a;  attacker_msg[s,s&apos;]  or user_calls[s,s&apos;]&#x000a;}&#x000a;&#x000a;// defines the initial state&#x000a;// purposefully allow starting in a state where the User already&#x000a;// wants to call somebody&#x000a;pred init[s : State] {&#x000a;    no s.audio and no s.ringing and&#x000a;    no s.last_answered and&#x000a;    no s.network and&#x000a;    all dest : Address | no s.calls[dest]&#x000a;}&#x000a;&#x000a;fact {&#x000a;  all s: ord/first | init[s]&#x000a;}&#x000a;&#x000a;fact {&#x000a;  all s: State, s&apos;: ord/next[s] | state_transition[s,s&apos;]&#x000a;}&#x000a;&#x000a;&#x000a;&#x000a;// a  bad state is one in which the User&apos;s audio is connected&#x000a;// to a participant but the User has not yet decided to call that&#x000a;// participant or to answer a call from them&#x000a;assert no_bad_states {&#x000a; // FILL IN HERE&#x000a; // two kinds of vulnerability found, the first assert should be able find all of them&#x000a;&#x000a; // all s: State |  (no s.audio or s.audio = s.last_answered  or s.audio = s.last_called)&#x000a;&#x000a; // or use one of the following assert to locate each faster&#x000a;&#x000a;   all s: State |  (no s.audio or s.audio = s.last_answered or  s.audio = s.ringing or s.audio = s.last_called)&#x000a;  // all s: State | some s1:State |  (no s.audio or s.audio = s.last_answered or s.audio = s1.last_called)&#x000a;}&#x000a;&#x000a;// describe the vulnerability that this check identified&#x000a;// The markers will reverse the &quot;fix&quot; to your model that you&#x000a;// implemented and then run this &quot;check&quot; to make sure the vulnerability&#x000a;// can be seen as described here.&#x000a;// FILL IN HERE&#x000a;&#x000a;// Choose a suitable bound for this check to show hwo the&#x000a;// vulnerability does not arise in your fixed protocol&#x000a;// Justify / explain your choice of your bound and&#x000a;// specifically, what guarantees you think are provided by this check.&#x000a;// FILL IN HERE&#x000a;// See the assignment handout for more details here.&#x000a;check no_bad_states for 8 // CHOOSE BOUND HERE&#x000a;&#x000a;// Alloy &quot;run&quot; commands and predicate definitions to&#x000a;// showing successful execution of your (fixed) protocol&#x000a;// FILL IN HERE&#x000a;// These should include&#x000a;// (1) The user successfully initiates a call (i.e. is the caller), &#x000a;// resulting in their audio being connected to the callee&#x000a;// (2) The user makes a call and receives a call in the same &#x000a;// execution trace, so that in one state their audio is connected &#x000a;// to one participant and in another state it is connected to some&#x000a;// other participant&#x000a;&#x000a;// Describe how you fixed the model to remove the vulnerability&#x000a;// FILL IN HERE&#x000a;// Your description should have enough detail to allow somebody&#x000a;// to &quot;undo&quot; (or &quot;reverse&quot;) your fix so we can then see the vulnerability&#x000a;// in your protocol as you describe it in comments above&#x000a;"/>
+
+<source filename="\$alloy4$\models\util\integer.als" content="module util/integer&#x000a;&#x000a;/*&#x000a; * A collection of utility functions for using Integers in Alloy.&#x000a; * Note that integer overflows are silently truncated to the current bitwidth&#x000a; * using the 2&apos;s complement arithmetic, unless the &quot;forbid overfows&quot; option is&#x000a; * turned on, in which case only models that don&apos;t have any overflows are &#x000a; * analyzed. &#x000a; */&#x000a;&#x000a;fun add  [n1, n2: Int] : Int { this/plus[n1, n2] }&#x000a;fun plus [n1, n2: Int] : Int { n1 fun/add n2 }&#x000a;&#x000a;fun sub   [n1, n2: Int] : Int { this/minus[n1, n2] }&#x000a;fun minus [n1, n2: Int] : Int { n1 fun/sub n2 }&#x000a;&#x000a;fun mul [n1, n2: Int] : Int { n1 fun/mul n2 }&#x000a;&#x000a;/**&#x000a; * Performs the division with &quot;round to zero&quot; semantics, except the following 3 cases&#x000a; * 1) if a is 0, then it returns 0&#x000a; * 2) else if b is 0, then it returns 1 if a is negative and -1 if a is positive&#x000a; * 3) else if a is the smallest negative integer, and b is -1, then it returns a&#x000a; */&#x000a;fun div [n1, n2: Int] : Int { n1 fun/div n2 }&#x000a;&#x000a;/** answer is defined to be the unique integer that satisfies &quot;a = ((a/b)*b) + remainder&quot; */&#x000a;fun rem [n1, n2: Int] : Int { n1 fun/rem n2 }&#x000a;&#x000a;/** negate */&#x000a;fun negate [n: Int] : Int { 0 fun/sub n }&#x000a;&#x000a;/** equal to */&#x000a;pred eq [n1, n2: Int] { int[n1] = int[n2] }&#x000a;&#x000a;/** greater than */&#x000a;pred gt [n1, n2: Int] { n1 &gt; n2 }&#x000a;&#x000a;/** less then */&#x000a;pred lt [n1, n2: Int] { n1 &lt; n2 }&#x000a;&#x000a;/** greater than or equal */&#x000a;pred gte [n1, n2: Int] { n1 &gt;= n2 }&#x000a;&#x000a;/** less than or equal */&#x000a;pred lte [n1, n2: Int] { n1 &lt;= n2 }&#x000a;&#x000a;/** integer is zero */&#x000a;pred zero [n: Int] { n = 0 }&#x000a;&#x000a;/** positive */&#x000a;pred pos  [n: Int] { n &gt; 0 }&#x000a;&#x000a;/** negative */&#x000a;pred neg  [n: Int] { n &lt; 0 }&#x000a;&#x000a;/** non-positive */&#x000a;pred nonpos [n: Int] { n &lt;= 0 }&#x000a;&#x000a;/** non-negative */&#x000a;pred nonneg [n: Int] { n &gt;= 0 }&#x000a;&#x000a;/** signum (aka sign or sgn) */&#x000a;fun signum [n: Int] : Int { n&lt;0 =&gt; (0 fun/sub 1) else (n&gt;0 =&gt; 1 else 0) }&#x000a;&#x000a;/**&#x000a; * returns the ith element (zero-based) from the set s&#x000a; * in the ordering of &apos;next&apos;, which is a linear ordering&#x000a; * relation like that provided by util/ordering&#x000a; */&#x000a;fun int2elem[i: Int, next: univ-&gt;univ, s: set univ] : lone s {&#x000a;  {e: s | #^next.e = int i }&#x000a;}&#x000a;&#x000a;/**&#x000a; * returns the index of the element (zero-based) in the&#x000a; * ordering of next, which is a linear ordering relation&#x000a; * like that provided by util/ordering&#x000a; */&#x000a;fun elem2int[e: univ, next: univ-&gt;univ] : lone Int {&#x000a;  Int[#^next.e]&#x000a;}&#x000a;&#x000a;/** returns the largest integer in the current bitwidth */&#x000a;fun max:one Int { fun/max }&#x000a;&#x000a;/** returns the smallest integer in the current bitwidth */&#x000a;fun min:one Int { fun/min }&#x000a;&#x000a;/** maps each integer (except max) to the integer after it */&#x000a;fun next:Int-&gt;Int { fun/next }&#x000a;&#x000a;/** maps each integer (except min) to the integer before it */&#x000a;fun prev:Int-&gt;Int { ~next }&#x000a;&#x000a;/** given a set of integers, return the largest element */&#x000a;fun max [es: set Int]: lone Int { es - es.^prev }&#x000a;&#x000a;/** given a set of integers, return the smallest element */&#x000a;fun min [es: set Int]: lone Int { es - es.^next }&#x000a;&#x000a;/** given an integer, return all integers prior to it */&#x000a;fun prevs [e: Int]: set Int { e.^prev }&#x000a;&#x000a;/** given an integer, return all integers following it */&#x000a;fun nexts [e: Int]: set Int { e.^next }&#x000a;&#x000a;/** returns the larger of the two integers */&#x000a;fun larger [e1, e2: Int]: Int { let a=int[e1], b=int[e2] | (a&lt;b =&gt; b else a) }&#x000a;&#x000a;/** returns the smaller of the two integers */&#x000a;fun smaller [e1, e2: Int]: Int { let a=int[e1], b=int[e2] | (a&lt;b =&gt; a else b) }&#x000a;"/>
+
+<source filename="\$alloy4$\models\util\ordering.als" content="module util/ordering[exactly elem]&#x000a;&#x000a;/*&#x000a; * Creates a single linear ordering over the atoms in elem. It also constrains all&#x000a; * the atoms to exist that are permitted by the scope on elem. That is, if the scope&#x000a; * on a signature S is 5, opening util/ordering[S] will force S to have 5 elements&#x000a; * and create a linear ordering over those five elements. The predicates and&#x000a; * functions below provide access to properties of the linear ordering, such as&#x000a; * which element is first in the ordering, or whether a given element precedes&#x000a; * another. You cannotcreate multiple linear orderings over the same signature with&#x000a; * this model. If you that functionality, try using the util/sequence module instead.&#x000a; *&#x000a; * Technical comment:&#x000a; * An important constraint: elem must contain all atoms permitted by the scope.&#x000a; * This is to let the analyzer optimize the analysis by setting all fields of each&#x000a; * instantiation of Ord to predefined values: e.g. by setting &apos;last&apos; to the highest&#x000a; * atom of elem and by setting &apos;next&apos; to {&lt;T0,T1&gt;,&lt;T1,T2&gt;,...&lt;Tn-1,Tn&gt;}, where n is&#x000a; * the scope of elem. Without this constraint, it might not be true that Ord.last is&#x000a; * a subset of elem, and that the domain and range of Ord.next lie inside elem.&#x000a; *&#x000a; * author: Ilya Shlyakhter&#x000a; * revisions: Daniel jackson&#x000a; */&#x000a;&#x000a;private one sig Ord {&#x000a;   First: set elem,&#x000a;   Next: elem -&gt; elem&#x000a;} {&#x000a;   pred/totalOrder[elem,First,Next]&#x000a;}&#x000a;&#x000a;/** first */&#x000a;fun first: one elem { Ord.First }&#x000a;&#x000a;/** last */&#x000a;fun last: one elem { elem - (next.elem) }&#x000a;&#x000a;/** return a mapping from each element to its predecessor */&#x000a;fun prev : elem-&gt;elem { ~(Ord.Next) }&#x000a;&#x000a;/** return a mapping from each element to its successor */&#x000a;fun next : elem-&gt;elem { Ord.Next }&#x000a;&#x000a;/** return elements prior to e in the ordering */&#x000a;fun prevs [e: elem]: set elem { e.^(~(Ord.Next)) }&#x000a;&#x000a;/** return elements following e in the ordering */&#x000a;fun nexts [e: elem]: set elem { e.^(Ord.Next) }&#x000a;&#x000a;/** e1 is less than e2 in the ordering */&#x000a;pred lt [e1, e2: elem] { e1 in prevs[e2] }&#x000a;&#x000a;/** e1 is greater than e2 in the ordering */&#x000a;pred gt [e1, e2: elem] { e1 in nexts[e2] }&#x000a;&#x000a;/** e1 is less than or equal to e2 in the ordering */&#x000a;pred lte [e1, e2: elem] { e1=e2 || lt [e1,e2] }&#x000a;&#x000a;/** e1 is greater than or equal to e2 in the ordering */&#x000a;pred gte [e1, e2: elem] { e1=e2 || gt [e1,e2] }&#x000a;&#x000a;/** returns the larger of the two elements in the ordering */&#x000a;fun larger [e1, e2: elem]: elem { lt[e1,e2] =&gt; e2 else e1 }&#x000a;&#x000a;/** returns the smaller of the two elements in the ordering */&#x000a;fun smaller [e1, e2: elem]: elem { lt[e1,e2] =&gt; e1 else e2 }&#x000a;&#x000a;/**&#x000a; * returns the largest element in es&#x000a; * or the empty set if es is empty&#x000a; */&#x000a;fun max [es: set elem]: lone elem { es - es.^(~(Ord.Next)) }&#x000a;&#x000a;/**&#x000a; * returns the smallest element in es&#x000a; * or the empty set if es is empty&#x000a; */&#x000a;fun min [es: set elem]: lone elem { es - es.^(Ord.Next) }&#x000a;&#x000a;assert correct {&#x000a;  let mynext = Ord.Next |&#x000a;  let myprev = ~mynext | {&#x000a;     ( all b:elem | (lone b.next) &amp;&amp; (lone b.prev) &amp;&amp; (b !in b.^mynext) )&#x000a;     ( (no first.prev) &amp;&amp; (no last.next) )&#x000a;     ( all b:elem | (b!=first &amp;&amp; b!=last) =&gt; (one b.prev &amp;&amp; one b.next) )&#x000a;     ( !one elem =&gt; (one first &amp;&amp; one last &amp;&amp; first!=last &amp;&amp; one first.next &amp;&amp; one last.prev) )&#x000a;     ( one elem =&gt; (first=elem &amp;&amp; last=elem &amp;&amp; no myprev &amp;&amp; no mynext) )&#x000a;     ( myprev=~mynext )&#x000a;     ( elem = first.*mynext )&#x000a;     (all disj a,b:elem | a in b.^mynext or a in b.^myprev)&#x000a;     (no disj a,b:elem | a in b.^mynext and a in b.^myprev)&#x000a;     (all disj a,b,c:elem | (b in a.^mynext and c in b.^mynext) =&gt;(c in a.^mynext))&#x000a;     (all disj a,b,c:elem | (b in a.^myprev and c in b.^myprev) =&gt;(c in a.^myprev))&#x000a;  }&#x000a;}&#x000a;run {} for exactly 0 elem expect 0&#x000a;run {} for exactly 1 elem expect 1&#x000a;run {} for exactly 2 elem expect 1&#x000a;run {} for exactly 3 elem expect 1&#x000a;run {} for exactly 4 elem expect 1&#x000a;check correct for exactly 0 elem&#x000a;check correct for exactly 1 elem&#x000a;check correct for exactly 2 elem&#x000a;check correct for exactly 3 elem&#x000a;check correct for exactly 4 elem&#x000a;check correct for exactly 5 elem&#x000a;"/>
+
+</alloy>
