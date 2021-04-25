@@ -90,7 +90,9 @@ pred user_recv_pre[m : Message, s : State] {
    (m.type in SDPAnswer and s.calls[m.source] = SignallingOffered) or
    (m.type in SDPCandidates and s.calls[m.source] = SignallingAnswered) or
    (m.type in Connect 
-    and s.calls[m.source] = SignallingComplete)
+    and s.calls[m.source] = SignallingComplete
+    and s.last_called = m.source //added line
+   )
   )
 }
 
@@ -207,9 +209,11 @@ pred user_answers[s, s' : State] {
 pred user_calls[s, s' : State] {
   some callee : Address | s'.last_called = callee and
   s'.network = s.network and
-  s'.calls = s.calls and
+  //s'.calls = s.calls and //deleted line
+  s'.calls = s.calls - (s.last_called -> s.calls[s.last_called]) and //added line
   s'.last_answered = s.last_answered and
-  s'.audio = s.audio and
+  //s'.audio = s.audio and //deleted line
+  no s'.audio //added line
   no s'.ringing   // calling somebody else stops any current ringing call
 }
 
@@ -261,18 +265,50 @@ assert no_bad_states {
 // implemented and then run this "check" to make sure the vulnerability
 // can be seen as described here.
 // FILL IN HERE
+//
+// There are two vulnerabilities we've found.
+// The first one is that when the user wants to abort the current call and
+// start calling a new callee, the callstate of the user towards previous 
+// callee doesn't reset, so the continuous process can still proceed, and 
+// results in the audio connection between the user and previous callee.
+// The second one is that the SignallingComplete state is both a caller state
+// and a callee state, which will resulting in a callee can receive a Connect
+// type message, therefore the audio will passively connected to the attacker.
+//
 
 // Choose a suitable bound for this check to show hwo the
 // vulnerability does not arise in your fixed protocol
 // Justify / explain your choice of your bound and
 // specifically, what guarantees you think are provided by this check.
 // FILL IN HERE
+// 
+// Since the callstates to each other addresses are recorded independently,
+// and the attacker in this model can only send messages which source are
+// themselves, plus 8 states is enough for a complete sequence of interaction
+// (either being caller or callee), so at most 8 normal states plus the attack 
+// state and its process state should be enough to cover all situations
+//
 // See the assignment handout for more details here.
-check no_bad_states for 8 // CHOOSE BOUND HERE
+check no_bad_states for 10 // CHOOSE BOUND HERE
 
 // Alloy "run" commands and predicate definitions to
 // showing successful execution of your (fixed) protocol
 // FILL IN HERE
+
+// should be obvious enough the simulate_1 is for the first situation
+// and simulate_2 is for the second
+pred simulate_1{
+  some s:State | some a : Address | s.audio = s.last_called and s.audio = a
+}
+pred simulate_2{
+  some s1,s2:State | some a1,a2:Address | 
+    s1.audio = s1.last_called and s1.audio = a1 and
+    s2.audio = s2.last_answered and s2.audio = a2 and
+    a1 != a2
+}
+run simulate_1 for 7
+run simulate_2 for 14
+
 // These should include
 // (1) The user successfully initiates a call (i.e. is the caller), 
 // resulting in their audio being connected to the callee
@@ -283,6 +319,18 @@ check no_bad_states for 8 // CHOOSE BOUND HERE
 
 // Describe how you fixed the model to remove the vulnerability
 // FILL IN HERE
+//
+// We fix the first vulnerbility by modify the user_calls prediction,
+// detailly, we specity the call action should reset the callstate towards
+// previous callee and cut any audio connection.
+// Number of modified rows are: 212 213 215 216
+// The second one is fixed by add a precondition to the user_recv_pre
+// prediction, to ensure only a caller can receive Connect message from their
+// callee.
+// Number of modified row is: 94
+// To undo our fixes, simply delete the lines marked with "added line" and
+// uncomment the lines marked with "deleted line"
+//
 // Your description should have enough detail to allow somebody
 // to "undo" (or "reverse") your fix so we can then see the vulnerability
 // in your protocol as you describe it in comments above
